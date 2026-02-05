@@ -1,0 +1,53 @@
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- Logo -->
+                    <a (click)="scrollTo('top')" [class.active]="activeSection === 'top'" class="logo">
+                        <h1>Scholar</h1>
+                    </a>
+
+                    <!-- Search -->
+                    <div class="search-input">
+                        <form id="search" (submit)="onSearch($event)">
+                            <input type="text" placeholder="Type Something" name="searchKeyword"
+                                [(ngModel)]="searchText" />
+                            <i class="fa fa-search" (click)="onSearchClick()"></i>
+                        </form>
+                    </div>
+
+                    <!-- Menu -->
+                    <ul class="nav" [class.open]="menuOpen">
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('top')" [class.active]="activeSection === 'top'">Home</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('services')" [class.active]="activeSection === 'services'">Services</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('courses')" [class.active]="activeSection === 'courses'">Courses</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('team')" [class.active]="activeSection === 'team'">Team</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('testimonials')" [class.active]="activeSection === 'testimonials'">Testimonials</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('events')" [class.active]="activeSection === 'events'">Events</a>
+                        </li>
+                        <li class="scroll-to-section">
+                            <a (click)="scrollTo('contact')" [class.active]="activeSection === 'contact'">Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Mobile Menu Trigger -->
+                    <a class="menu-trigger" (click)="toggleMenu()">
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

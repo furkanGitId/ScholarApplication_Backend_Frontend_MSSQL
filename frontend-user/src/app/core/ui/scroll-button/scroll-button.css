@@ -1,0 +1,19 @@
+.scroll-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.scroll-buttons button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #7a6ad8;
+    color: #fff;
+    cursor: pointer;
+}

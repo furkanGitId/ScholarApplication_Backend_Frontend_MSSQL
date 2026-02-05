@@ -1,0 +1,148 @@
+<!-- =========================
+     Stats Section
+     ========================= -->
+<section class="stats-banner-grid">
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Total Users</h3>
+                <div class="stat-value">{{ UsersCount }}</div>
+            </div>
+            <div class="stat-icon cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Total Active Users</h3>
+                <div class="stat-value">10</div>
+            </div>
+            <div class="stat-icon magenta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Total Inactive Users</h3>
+                <div class="stat-value">10</div>
+            </div>
+            <div class="stat-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="18" y1="8" x2="23" y2="13" />
+                    <line x1="23" y1="8" x2="18" y2="13" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================
+     Users Table
+     ========================= -->
+<section class="content-grid" style="grid-template-columns: 1fr;">
+    <div class="glass-card table-card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">User Highlights</h2>
+                <p class="card-subtitle">Manage user content</p>
+            </div>
+            <div class="card-actions">
+                <button class="card-btn" (click)="openAddModal()">Add New</button>
+                <button class="card-btn" (click)="exportExcel()">Export</button>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>User ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>
+                            <div class="table-user">
+                                <div class="table-avatar"
+                                    style="background: linear-gradient(135deg, var(--emerald-light), var(--emerald));">
+                                    {{ user.fullName.charAt(0) | uppercase }}
+                                </div>
+                                <div class="table-user-info">
+                                    <span class="table-user-name">{{ user.fullName }}</span>
+                                    <span class="table-user-email">{{ user.email }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>#{{ user.id }}</td>
+                        <td>
+                            <button class="card-btn" (click)="openEditModal(user)">Edit</button>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="users.length === 0">
+                        <td colspan="4" style="text-align: center;">
+                            No users found
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- =========================
+     Add / Edit Modal
+     ========================= -->
+<div class="modal-backdrop" *ngIf="showModal">
+    <div class="glass-card glass-card-3d modal-card">
+        <div class="card-header">
+            <h3>{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
+            <button class="card-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form class="modal-form" (ngSubmit)="saveUser()">
+            <label>Full Name</label>
+            <input type="text" name="fullName" placeholder="Enter full name" [(ngModel)]="selectedUser.fullName"
+                required />
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email" [(ngModel)]="selectedUser.email" required />
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password"
+                [(ngModel)]="selectedUser.password" required />
+
+            <div class="modal-actions">
+                <button type="submit" class="card-btn">
+                    {{ isEditMode ? 'Update' : 'Add' }}
+                </button>
+                <button type="button" class="card-btn" (click)="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

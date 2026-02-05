@@ -1,0 +1,95 @@
+<section class="content-grid">
+    <div class="glass-card table-card">
+        <!-- Header -->
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Events</h2>
+                <p class="card-subtitle">Manage events</p>
+            </div>
+            <div class="card-actions">
+                <button class="card-btn" (click)="openAddModal()">
+                    Add Event
+                </button>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="testimonial-grid">
+            <div class="testimonial-card glass-card glass-card-3d" *ngFor="let event of events">
+
+                <div class="testimonial-image">
+                    <img [src]="event.image" alt="event" />
+                </div>
+
+                <div class="testimonial-body">
+                    <small class="role">{{ event.category }}</small>
+                    <h3 class="name">{{ event.title }}</h3>
+
+                    <p class="testimonial-message">
+                        Date: {{ event.eventDate | date }} <br />
+                        Duration: {{ event.durationHours }} Hours <br />
+                        Price: {{ event.price }}
+                    </p>
+
+                    <div class="testimonial-actions">
+                        <button class="card-btn" (click)="openEditModal(event)">
+                            Edit
+                        </button>
+                        <button class="card-btn danger" (click)="deleteEvent(event.id)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="events.length === 0" class="empty-state">
+                No events found
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+    <div class="glass-card glass-card-3d modal-card">
+        <div class="card-header">
+            <h3>
+                {{ isEditMode ? 'Edit Event' : 'Add Event' }}
+            </h3>
+            <button class="card-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form class="modal-form" (submit)="saveEvent()">
+            <label>Title</label>
+            <input type="text" [(ngModel)]="selectedEvent.title" name="title" />
+
+            <label>Category</label>
+            <input type="text" [(ngModel)]="selectedEvent.category" name="category" />
+
+            <label>Event Date</label>
+            <input type="date" [(ngModel)]="selectedEvent.eventDate" name="eventDate" />
+
+            <label>Duration (Hours)</label>
+            <input type="number" [(ngModel)]="selectedEvent.durationHours" name="durationHours" />
+
+            <label>Price</label>
+            <input type="number" [(ngModel)]="selectedEvent.price" name="price" />
+
+            <label>Image</label>
+            <input type="file" accept="image/png,image/jpeg" (change)="onImageSelected($event)" />
+
+            <div *ngIf="selectedEvent.image" style="margin-top:10px;">
+                <img [src]="selectedEvent.image" width="100" height="100" />
+            </div>
+
+            <div class="modal-actions">
+                <button type="submit" class="card-btn">
+                    {{ isEditMode ? 'Update' : 'Add' }}
+                </button>
+                <button type="button" class="card-btn" (click)="closeModal()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

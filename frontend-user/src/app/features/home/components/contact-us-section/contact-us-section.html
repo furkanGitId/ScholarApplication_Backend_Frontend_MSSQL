@@ -1,0 +1,62 @@
+<div class="contact-us section" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6  align-self-center">
+                <div class="section-heading">
+                    <h6>{{ heading.smallTitle }}</h6>
+                    <h2>{{ heading.title }}</h2>
+                    <p>{{ heading.description }}</p>
+                    <div class="special-offer">
+                        <span class="offer">
+                            off<br><em>{{ specialOffer.offerPercentage }}</em>
+                        </span>
+                        <h6>Valid: <em>{{ specialOffer.validityDate }}</em></h6>
+                        <h4>
+                            {{ specialOffer.title }}
+                            <em>{{ specialOffer.offerPercentage }}</em> OFF!
+                        </h4>
+                        <a href="#"><i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-us-content">
+            
+                    <form id="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+            
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="text" id="name" name="name" formControlName="name" placeholder="Your Name..."
+                                        autocomplete="on" />
+                                </fieldset>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="email" id="email" name="email" formControlName="email"
+                                        placeholder="Your E-mail..." />
+                                </fieldset>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea id="message" name="message" formControlName="message"
+                                        placeholder="Your Message"></textarea>
+                                </fieldset>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="orange-button" [disabled]="contactForm.invalid">
+                                        Send Message Now
+                                    </button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

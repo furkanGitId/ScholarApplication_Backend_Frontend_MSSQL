@@ -1,0 +1,30 @@
+<div class="main-banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <owl-carousel-o [options]="carouselOptions">
+                    <ng-template carouselSlide *ngFor="let banner of banners">
+                        <div class="item" [ngClass]="banner.class">
+                            <div class="header-text">
+                                <span class="category">{{ banner.category }}</span>
+                                <h2>{{ banner.title }}</h2>
+                                <p>{{ banner.description }}</p>
+                
+                                <div class="buttons">
+                                    <div class="main-button">
+                                        <a href="#">Request Demo</a>
+                                    </div>
+                                    <div class="icon-button">
+                                        <a href="#">
+                                            <i class="fa fa-play"></i> {{ banner.playText }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+        </div>
+    </div>
+</div>

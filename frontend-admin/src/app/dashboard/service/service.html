@@ -1,0 +1,97 @@
+<section class="content-grid" style="grid-template-columns: 1fr;">
+    <div class="glass-card table-card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Services</h2>
+                <p class="card-subtitle">Manage service highlights</p>
+            </div>
+            <div class="card-actions">
+                <button class="card-btn" (click)="openAddModal()">Add New</button>
+                <button class="card-btn" (click)="exportExcel()">Export</button>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Icon</th>
+                        <th>Link</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let service of services">
+                    <tr>
+                        <td>{{ service.id }}</td>
+                        <td>{{ service.title }}</td>
+                        <td>{{ service.description }}</td>
+                        <td>
+                            <img [src]="service.icon" width="40" style="filter: drop-shadow(0 0 1px #000);"
+                                onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/d/d6/Nophoto.jpg';" />
+                        </td>
+                        <td>{{ service.link }}</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <button class="card-btn" (click)="openEditModal(service)">
+                                    Edit
+                                </button>
+                            
+                                <button class="card-btn" style="background: #ff4d4f;" (click)="deleteService(service.id)">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="services.length === 0">
+                        <td colspan="6" style="text-align: center;">
+                            No services found
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+    <div class="glass-card glass-card-3d modal-card">
+        <div class="card-header">
+            <h3>{{ isEditMode ? 'Edit Service' : 'Add Service' }}</h3>
+            <button class="card-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form class="modal-form" (submit)="saveService()">
+            <label>Title</label>
+            <input type="text" name="title" [(ngModel)]="selectedService.title" placeholder="Enter title" />
+
+            <label>Description</label>
+            <textarea name="description" [(ngModel)]="selectedService.description"
+                placeholder="Enter description"></textarea>
+
+            <label>Icon Path</label>
+            <input type="file" accept="image/png" name="icon" (change)="onIconSelected($event)" placeholder="/assets/images/service-01.png" />
+            
+            <div *ngIf="selectedService.icon" style="margin-top:8px;">
+                <img [src]="selectedService.icon" width="100" height="100" />
+            </div>
+
+            <label>Link</label>
+            <input type="text" name="link" [(ngModel)]="selectedService.link" placeholder="#" />
+
+            <div class="modal-actions">
+                <button type="submit" class="card-btn">
+                    {{ isEditMode ? 'Update' : 'Add' }}
+                </button>
+                <button type="button" class="card-btn" (click)="closeModal()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="section fun-facts" #funFactsSection>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="wrapper">
+          <div class="row">
+
+            <div class="col-lg-3 col-md-6" *ngFor="let fact of funfacts; let last = last">
+              <div class="counter" [class.end]="last">
+                <h2 class="count-title count-number">
+                  {{ fact.current }}
+                </h2>
+                <p class="count-text">{{ fact.label }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

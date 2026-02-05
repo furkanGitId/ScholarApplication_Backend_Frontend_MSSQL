@@ -1,0 +1,87 @@
+<section class="content-grid">
+    <div class="glass-card table-card">
+        <!-- Header -->
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Testimonials</h2>
+                <p class="card-subtitle">Manage testimonials</p>
+            </div>
+            <div class="card-actions">
+                <button class="card-btn" (click)="openAddModal()">
+                    Add Testimonial
+                </button>
+            </div>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="testimonial-grid">
+            <div class="testimonial-card glass-card glass-card-3d" *ngFor="let item of testimonials">
+
+                <div class="testimonial-image">
+                    <img [src]="item.image" alt="author" />
+                </div>
+
+                <div class="testimonial-body">
+                    <p class="testimonial-message">
+                        “{{ item.message }}”
+                    </p>
+
+                    <small class="role">{{ item.role }}</small>
+                    <h3 class="name">{{ item.name }}</h3>
+
+                    <div class="testimonial-actions">
+                        <button class="card-btn" (click)="openEditModal(item)">
+                            Edit
+                        </button>
+                        <button class="card-btn danger" (click)="deleteTestimonial(item.id)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="testimonials.length === 0" class="empty-state">
+                No testimonials found
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+    <div class="glass-card glass-card-3d modal-card">
+        <div class="card-header">
+            <h3>
+                {{ isEditMode ? 'Edit Testimonial' : 'Add Testimonial' }}
+            </h3>
+            <button class="card-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form class="modal-form" (submit)="saveTestimonial()">
+            <label>Message</label>
+            <textarea rows="4" [(ngModel)]="selectedTestimonial.message" name="message"></textarea>
+
+            <label>Name</label>
+            <input type="text" [(ngModel)]="selectedTestimonial.name" name="name" />
+
+            <label>Role</label>
+            <input type="text" [(ngModel)]="selectedTestimonial.role" name="role" />
+
+            <label>Image</label>
+            <input type="file" accept="image/png,image/jpeg" (change)="onImageSelected($event)" />
+
+            <div *ngIf="selectedTestimonial.image" style="margin-top:10px;">
+                <img [src]="selectedTestimonial.image" width="100" height="100" />
+            </div>
+
+            <div class="modal-actions">
+                <button type="submit" class="card-btn">
+                    {{ isEditMode ? 'Update' : 'Add' }}
+                </button>
+                <button type="button" class="card-btn" (click)="closeModal()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="team section" id="team">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6" *ngFor="let member of teamMembers">
+                <div class="team-member">
+                    <div class="main-content">
+                        <img [src]="member.image" [alt]="member.name" />
+                        <span class="category">{{ member.role }}</span>
+                        <h4>{{ member.name }}</h4>
+                        <ul class="social-icons">
+                            <li *ngFor="let soc of member.social">
+                                <a [href]="soc.url"><i [class]="soc.iconClass"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

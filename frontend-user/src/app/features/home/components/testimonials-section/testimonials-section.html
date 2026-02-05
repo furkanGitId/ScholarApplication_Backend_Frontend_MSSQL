@@ -1,0 +1,36 @@
+<div class="section testimonials" id="testimonials">
+    <div class="container">
+        <div class="row">
+            <!-- Carousel -->
+            <div class="col-lg-7">
+                <owl-carousel-o [options]="carouselOptions">
+                    <ng-template carouselSlide *ngFor="let testimonial of testimonials">
+                        <div class="item">
+                            <div class="testimonial-message">
+                                <p>“{{ testimonial.message }}”</p>
+                            </div>
+                            <div class="author">
+                                <img [src]="testimonial.image" alt="">
+                                <span class="category">{{ testimonial.role }}</span>
+                                <h4>{{ testimonial.name }}</h4>
+                            </div>
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+
+            <!-- Static Content -->
+            <div class="col-lg-5 align-self-center">
+                <div class="section-heading">
+                    <h6>TESTIMONIALS</h6>
+                    <h2>What they say about us?</h2>
+                    <p>
+                        You can search free CSS templates on Google using different keywords
+                        such as templatemo portfolio, templatemo gallery, templatemo blue color, etc.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

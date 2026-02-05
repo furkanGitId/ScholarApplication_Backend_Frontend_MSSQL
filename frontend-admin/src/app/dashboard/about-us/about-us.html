@@ -1,0 +1,88 @@
+<section class="content-grid" style="grid-template-columns: 1fr;">
+    <div class="glass-card table-card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">About Us</h2>
+                <p class="card-subtitle">Manage About Us content</p>
+            </div>
+            <div class="card-actions">
+                <button class="card-btn" (click)="openAddModal()">Add New</button>
+                <button class="card-btn" (click)="exportExcel()">Export</button>
+            </div>
+        </div>
+
+        <div class="accordion-wrapper">
+            <div class="accordion-item glass-card glass-card-3d" *ngFor="let item of accordions; let i = index" style="margin-bottom: 14px;">
+                <div class="accordion-header" (click)="toggleAccordion(i)" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 10px;">
+                    <div style="display: flex; gap: 10px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem;">{{ item.title }}</h4>
+                            <small class="text-muted">Key: {{ item.accordionKey }}</small>
+                        </div>
+
+                        <div style="margin-top: 5px;">
+                            <svg *ngIf="activeIndex === i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                            </svg>
+                            <svg *ngIf="activeIndex !== i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button class="card-btn" (click)="openEditModal(item); $event.stopPropagation()">
+                            Edit
+                        </button>
+
+                        <button class="card-btn" style="background:#ff4d4f;"
+                            (click)="deleteAccordion(item.id); $event.stopPropagation()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+                <div class="accordion-body" *ngIf="activeIndex === i">
+                    <div class="accordion-content" [innerHTML]="item.content"></div>
+                </div>
+            </div>
+
+            <div *ngIf="accordions.length === 0" style="text-align:center; padding:20px;">
+                No accordion records found
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+    <div class="glass-card glass-card-3d modal-card">
+        <div class="card-header">
+            <h3>{{ isEditMode ? 'Edit About Us' : 'Add About Us' }}</h3>
+            <button class="card-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form class="modal-form" (submit)="saveAccordion()">
+            <label>Title</label>
+            <input type="text" name="title" [(ngModel)]="selectedAccordion.title" placeholder="Enter title" />
+
+            <label>Key</label>
+            <input type="text" name="accordionKey" [(ngModel)]="selectedAccordion.accordionKey"
+                placeholder="Enter key" />
+            
+            <label>Content</label>
+            <textarea name="content" [(ngModel)]="selectedAccordion.content" placeholder="Enter content"></textarea>
+
+            <div class="modal-actions">
+                <button type="submit" class="card-btn">
+                    {{ isEditMode ? 'Update' : 'Add' }}
+                </button>
+                <button type="button" class="card-btn" (click)="closeModal()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
