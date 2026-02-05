@@ -197,6 +197,36 @@ Run:
 docker-compose up --build
 ```
 
+### Common Docker Compose Commands:
+
+Here are some common Docker Compose commands you might find useful:
+
+```bash
+# Build, create, and start containers
+docker-compose up -d
+
+# Build or rebuild services
+docker-compose build
+
+# Stop and remove containers, networks, and images created by `up`
+docker-compose down
+
+# Stop services
+docker-compose stop
+
+# Start services
+docker-compose start
+
+# View output from containers
+docker-compose logs -f
+
+# Execute a command in a running container
+docker-compose exec <service_name> <command>
+
+# View the status of services
+docker-compose ps
+```
+
 ## API Documentation
 - If you use OpenAPI/Swagger, link to the Swagger UI: `http://localhost:5000/swagger` (example).
 - Provide sample endpoints:
