@@ -1,0 +1,6 @@
+@ScholarApp.WebApi_HostAddress = http://localhost:5089
+
+GET {{ScholarApp.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
